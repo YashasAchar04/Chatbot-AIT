@@ -1,0 +1,34 @@
+<div class="chatbot-container">
+  <div class="chat-window">
+    <div class="messages">
+        <div *ngIf="showDefaultMessage" class="default-message">
+  Send 'hi' to interact with Chat Bot
+</div>
+      <div *ngFor="let message of messages" [ngClass]="message.sender">
+        <div class="message-bubble">
+          {{ message.text }}
+          <div *ngIf="message.options" class="options">
+            <button
+              *ngFor="let option of message.options"
+              (click)="handleOptionClick(option)"
+              type="button"
+            >
+              {{ option }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input
+        [(ngModel)]="userInput"
+        (keyup.enter)="sendMessage()"
+        type="text"
+        placeholder="Type your message..."
+      />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+
+  </div>
+</div>
